@@ -1,7 +1,8 @@
-//package Unit2Week2;
+package Unit2Week2;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -34,31 +35,16 @@ public class BuildHeap {
 
     private void generateSwaps() {
       swapList = new ArrayList<Swap>();
-      // The following naive implementation just sorts 
-      // the given sequence using selection sort algorithm
-      // and saves the resulting sequence of swaps.
-      // This turns the given array into a heap, 
-      // but in the worst case gives a quadratic number of swaps.
-      //
-      // TODO: replace by a more efficient implementation
-      /*for (int i = 0; i < data.length; ++i) {
-        for (int j = i + 1; j < data.length; ++j) {
-          if (data[i] > data[j]) {
-            swaps.add(new Swap(i, j));
-            int tmp = data[i];
-            data[i] = data[j];
-            data[j] = tmp;
-          }
-        }
-      }	*/
       
-      int starter_node = log2(data.length)/2;
-     // int starter_node = 0;
+      
+      int starter_node = (int)Math.pow(2, log2(data.length))-2;
+     
       
       for (int i = starter_node; i >= 0; i--)
       {
     	  siftDown(i,data);
       }
+    
       
       
     }
@@ -90,6 +76,10 @@ public class BuildHeap {
     				index = indexLeft;
     				swaps++;
     			}
+    			else
+				{
+					break;
+				}
     			
     			
     		}
@@ -104,6 +94,10 @@ public class BuildHeap {
     					index = indexLeft;
     					swaps++;
     				}
+    				else
+    				{
+    					break;
+    				}
     				
     			}
     			else // if the right child node is the smallest
@@ -115,7 +109,10 @@ public class BuildHeap {
     					index = indexRight;
     					swaps++;
     				}
-    				
+    				else
+    				{
+    					break;
+    				}
     		}
     		
     		
@@ -172,4 +169,5 @@ public class BuildHeap {
             return Integer.parseInt(next());
         }
     }
+   
 }
